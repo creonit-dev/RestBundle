@@ -14,7 +14,7 @@ class PathNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = [])
     {
         $data = [
             'tags' => array_map(function (Tag $tag) {
@@ -38,7 +38,7 @@ class PathNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    protected function normalizeResponses($object, $format = null, array $context = [])
+    protected function normalizeResponses($object, string $format = null, array $context = [])
     {
         $data = [];
         foreach ($object->getResponses() as $response) {

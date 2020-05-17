@@ -13,7 +13,7 @@ class ResponseContentNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = [])
     {
         $data = [
             'schema' => [
@@ -25,7 +25,7 @@ class ResponseContentNormalizer extends AbstractNormalizer
         return $this->serializer->normalize($data, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, string $format = null)
     {
         return $data instanceof ResponseContent;
     }

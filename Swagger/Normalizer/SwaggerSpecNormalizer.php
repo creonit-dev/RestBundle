@@ -14,7 +14,7 @@ class SwaggerSpecNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = [])
     {
         $data = [
             'openapi' => $object->getOpenApiVersion(),
@@ -32,7 +32,7 @@ class SwaggerSpecNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    protected function normalizePaths($object, $format = null, array $context = [])
+    protected function normalizePaths($object, string $format = null, array $context = [])
     {
         $result = [];
 
@@ -72,7 +72,7 @@ class SwaggerSpecNormalizer extends AbstractNormalizer
         return array_unique($urls);
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, string $format = null)
     {
         return $data instanceof SwaggerSpec;
     }

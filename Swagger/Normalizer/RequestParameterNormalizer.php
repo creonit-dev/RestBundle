@@ -8,7 +8,7 @@ use Creonit\RestBundle\Annotation\Parameter\RequestParameter;
 
 class RequestParameterNormalizer extends AbstractParameterNormalizer
 {
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, string $format = null)
     {
         return $data instanceof RequestParameter;
     }

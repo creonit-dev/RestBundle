@@ -13,7 +13,7 @@ abstract class AbstractParameterNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = [])
     {
         $data = [
             'name' => $object->name,
@@ -33,7 +33,7 @@ abstract class AbstractParameterNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    protected function normalizeSchema($object, $format = null, array $context = [])
+    protected function normalizeSchema($object, string $format = null, array $context = [])
     {
         $schema = [
             'type' => $object->type,

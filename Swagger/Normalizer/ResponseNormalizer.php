@@ -13,7 +13,7 @@ class ResponseNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = [])
     {
         $data = [
             'description' => $object->getDescription(),
@@ -28,7 +28,7 @@ class ResponseNormalizer extends AbstractNormalizer
      * @param null $format
      * @param array $context
      */
-    protected function normalizeContents($object, $format = null, array $context = [])
+    protected function normalizeContents($object, string $format = null, array $context = [])
     {
         $data = [];
 
@@ -39,7 +39,7 @@ class ResponseNormalizer extends AbstractNormalizer
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, string $format = null)
     {
         return $data instanceof Response;
     }
