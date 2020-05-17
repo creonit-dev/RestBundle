@@ -1,0 +1,35 @@
+services:
+  Creonit\RestBundle\Controller\:
+    resource: '../../Controller/*Controller.php'
+    tags: ['controller.service_arguments']
+
+  Creonit\RestBundle\Collector\:
+    resource: '../../Collector/*Collector.php'
+    public: true
+    autowire: true
+
+  Creonit\RestBundle\Swagger\Normalizer\:
+    resource: '../../Swagger/Normalizer/*Normalizer.php'
+    tags: [serializer.normalizer]
+    calls:
+      - ['setSerializer', ['@serializer']]
+
+  Creonit\RestBundle\Event\RestListener:
+    autowire: true
+    tags:
+      - {name: kernel.event_listener, event: kernel.response}
+      - {name: kernel.event_listener, event: kernel.request}
+      - {name: kernel.event_listener, event: kernel.exception}
+
+  Creonit\RestBundle\Handler\RestHandler:
+    public: true
+    autowire: true
+    shared: false
+
+  Creonit\RestBundle\Request\ParamConverter\RestHandlerParamConverter:
+    public: true
+    autowire: true
+    calls:
+      - ['setContainer', ['@service_container']]
+    tags:
+      - {name: 'request.param_converter'}
