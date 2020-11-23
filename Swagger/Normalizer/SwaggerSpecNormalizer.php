@@ -9,6 +9,13 @@ use Creonit\RestBundle\Swagger\Spec\SwaggerSpec;
 
 class SwaggerSpecNormalizer extends AbstractNormalizer
 {
+    protected $spec = [];
+
+    public function __construct($spec)
+    {
+        $this->spec = $spec;
+    }
+
     /**
      * @param SwaggerSpec $object
      * @param null $format
@@ -24,7 +31,10 @@ class SwaggerSpecNormalizer extends AbstractNormalizer
             'paths' => $this->normalizePaths($object, $format, $context),
         ];
 
-        return $this->serializer->normalize($data, $format, $context);
+        return array_merge_recursive(
+            $this->serializer->normalize($data, $format, $context),
+            $this->spec
+        );
     }
 
     /**

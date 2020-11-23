@@ -116,12 +116,7 @@ class RestHandler
 
     public function isAuthenticated()
     {
-        $trustResolver = new AuthenticationTrustResolver();
-
-        $authenticatedVoter = new AuthenticatedVoter($trustResolver);
-        $token = $this->container->get('security.token_storage')->getToken();
-
-        return $authenticatedVoter->vote($token, null, ['IS_AUTHENTICATED_REMEMBERED']) !== -1;
+        return $this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 
     public function checkPermission($attributes, $object = null)

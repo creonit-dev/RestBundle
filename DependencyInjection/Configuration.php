@@ -21,6 +21,9 @@ class Configuration implements ConfigurationInterface
                     ->example(['^/api', '^/api(?!/admin)'])
                     ->prototype('scalar')->end()
                 ->end()
+                ->variableNode('spec')
+                ->defaultValue([])
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -17,6 +17,7 @@ class CreonitRestExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('creonit_rest.path_patterns', $config['path_patterns']);
+        $container->setParameter('creonit_rest.spec', $config['spec']);
 
         $this->loadServices($container);
     }
