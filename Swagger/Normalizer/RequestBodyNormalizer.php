@@ -22,6 +22,7 @@ class RequestBodyNormalizer extends AbstractNormalizer
 
         $data = [
             'schema' => [
+                'type' => 'object',
                 'properties' => $properties,
             ],
         ];
