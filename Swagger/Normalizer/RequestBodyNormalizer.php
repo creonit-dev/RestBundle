@@ -16,8 +16,16 @@ class RequestBodyNormalizer extends AbstractNormalizer
     public function normalize($object, string $format = null, array $context = [])
     {
         $properties = [];
+        $encoding = [];
+
         foreach ($object->getProperties() as $property) {
             $properties[$property->getName()] = $property;
+
+            if ($property->getExplode()) {
+                $encoding[$property->getName()] = [
+                    'explode' => true
+                ];
+            }
         }
 
         $data = [
@@ -25,6 +33,7 @@ class RequestBodyNormalizer extends AbstractNormalizer
                 'type' => 'object',
                 'properties' => $properties,
             ],
+            'encoding' => $encoding
         ];
 
         return $this->serializer->normalize($data, $format, $context);

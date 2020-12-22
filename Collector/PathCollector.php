@@ -89,7 +89,8 @@ class PathCollector implements CollectorInterface
                     ->setName($annotation->name)
                     ->setType($annotation->type)
                     ->setDescription($annotation->description)
-                    ->setFormat($annotation->format);
+                    ->setFormat($annotation->format)
+                    ->setExplode($annotation->explode);
 
                 $path->addBodyProperty($bodyProperty);
 

@@ -10,6 +10,7 @@ class RequestBodyProperty
     protected $type;
     protected $description;
     protected $format;
+    protected $explode;
 
     /**
      * @return mixed
@@ -84,6 +85,24 @@ class RequestBodyProperty
     public function setFormat($format)
     {
         $this->format = $format;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExplode()
+    {
+        return $this->explode;
+    }
+
+    /**
+     * @param mixed $explode
+     * @return $this
+     */
+    public function setExplode($explode)
+    {
+        $this->explode = $explode;
         return $this;
     }
 }

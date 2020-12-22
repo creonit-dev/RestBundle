@@ -10,13 +10,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
 
 class RestListener
 {
 
     /** @var  ContainerInterface */
     protected $container;
-    /** @var LoggerInterface  */
+    /** @var LoggerInterface */
     protected $logger;
 
     public function __construct(ContainerInterface $container, LoggerInterface $logger)
@@ -57,6 +59,18 @@ class RestListener
 
         if ($exception instanceof RestErrorException) {
             $error = $exception->getRestError();
+
+        } else if ($exception->getPrevious() instanceof InsufficientAuthenticationException) {
+            $error = new RestError();
+            $error->setMessage('Требуется авторизация');
+            $error->setCode($exception->getCode());
+            $error->setStatus(401);
+
+        } else if ($exception instanceof AccessDeniedHttpException) {
+            $error = new RestError();
+            $error->setMessage('Доступ запрещен');
+            $error->setCode($exception->getCode());
+            $error->setStatus(403);
 
         } else {
             $error = new RestError();
